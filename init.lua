@@ -1,6 +1,7 @@
 -- Standard boilerplate to install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
+	vim.notify("Installing lazy package manager...")
 	vim.fn.system({
 		"git",
 		"clone",
@@ -9,6 +10,12 @@ if not vim.loop.fs_stat(lazypath) then
 		"--branch=stable", -- latest stable release
 		lazypath,
 	})
+	local f = io.open(vim.fn.stdpath("config") .. "/lazy-lock.json", "r")
+	if f then
+		local data = f:read("*a")
+		local lock = vim.json.decode(data)
+		vim.fn.system { "git", "-C", lazypath, "checkout", lock["lazy.nvim"].commit }
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 
