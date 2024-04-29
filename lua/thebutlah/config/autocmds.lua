@@ -23,7 +23,7 @@ end
 local configure_folds = function()
 	vim.wo.foldmethod = "expr"
 	vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-	vim.wo.foldenable = true
+	vim.wo.foldenable = false -- change to true to auto fold.
 	vim.wo.foldminlines = 5
 	vim.wo.foldlevel = max_fold_level()
 end
