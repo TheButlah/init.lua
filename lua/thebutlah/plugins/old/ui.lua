@@ -8,11 +8,11 @@ return {
 
 	{ -- Colorscheme
 		-- Theme inspired by Atom
-		'navarasu/onedark.nvim',
+		"navarasu/onedark.nvim",
 		priority = 1000,
 		lazy = false,
 		config = function()
-			vim.cmd.colorscheme('onedark')
+			vim.cmd.colorscheme("onedark")
 		end,
 	},
 
@@ -33,57 +33,69 @@ return {
 			-- Removes the deprecated commands from v1.x
 			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 			require("neo-tree").setup(opts)
-		end
+		end,
 	},
 
 	{
 		-- A better statusline
-		'nvim-lualine/lualine.nvim',
+		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		opts = {
-			sections = { lualine_c = { { 'filename', path = 4 } } }
-		}
+			sections = { lualine_c = { { "filename", path = 4 } } },
+		},
 	},
 
 	{
 		-- Add indentation guides even on blank lines
-		'lukas-reineke/indent-blankline.nvim',
+		"lukas-reineke/indent-blankline.nvim",
 		event = "VeryLazy",
 		opts = {
-			char = '┊',
+			char = "┊",
 			show_trailing_blankline_indent = false,
 		},
 	},
 
 	{
 		-- Visually indicates status of LSP
-		'neovim/nvim-lspconfig',
-		dependencies = { { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} } },
+		"neovim/nvim-lspconfig",
+		dependencies = { { "j-hui/fidget.nvim", tag = "legacy", opts = {} } },
 	},
 
 	-- Git related plugins
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
-		'lewis6991/gitsigns.nvim',
+		"lewis6991/gitsigns.nvim",
 		event = "BufRead",
 		opts = {
 			-- See `:help gitsigns.txt`
 			signs = {
-				add = { text = '+' },
-				change = { text = '~' },
-				delete = { text = '_' },
-				topdelete = { text = '‾' },
-				changedelete = { text = '~' },
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
 			},
 			on_attach = function(bufnr)
-				vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
-					{ buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-				vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk,
-					{ buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-				vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
-					{ buffer = bufnr, desc = '[P]review [H]unk' })
+				vim.keymap.set(
+					"n",
+					"<leader>gp",
+					require("gitsigns").prev_hunk,
+					{ buffer = bufnr, desc = "[G]o to [P]revious Hunk" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>gn",
+					require("gitsigns").next_hunk,
+					{ buffer = bufnr, desc = "[G]o to [N]ext Hunk" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>ph",
+					require("gitsigns").preview_hunk,
+					{ buffer = bufnr, desc = "[P]review [H]unk" }
+				)
 			end,
 		},
 	},
-	{ 'tpope/vim-fugitive', lazy = false, dependencies = 'tpope/vim-rhubarb' },
+	{ "tpope/vim-fugitive", lazy = false, dependencies = "tpope/vim-rhubarb" },
 }

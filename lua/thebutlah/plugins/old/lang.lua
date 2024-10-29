@@ -1,8 +1,8 @@
 -- Language specific configuration
 return {
-	'neovim/nvim-lspconfig',
+	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- Additional lua configuration, makes nvim stuff amazing!
-		{ 'folke/neodev.nvim', opts = {} }
-	}
+		{ "folke/neodev.nvim", opts = {} },
+	},
 }

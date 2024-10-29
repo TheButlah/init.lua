@@ -1,9 +1,9 @@
 -- AI bullshit
 return {
-	'zbirenbaum/copilot.lua',
+	"zbirenbaum/copilot.lua",
 	enabled = false, -- change this when I have a copilot subscription again lol
-	cmd = 'Copilot',
-	event = 'InsertEnter',
+	cmd = "Copilot",
+	event = "InsertEnter",
 	opts = {
 		panel = {
 			-- Causes the predictions in the panel to update as you type.
@@ -14,9 +14,9 @@ return {
 			-- Causes suggestions to appear as you type in insert mode.
 			auto_trigger = true,
 			keymap = {
-				accept = '<M-c>',
-				next = '<M-j>',
-				prev = '<M-f>',
+				accept = "<M-c>",
+				next = "<M-j>",
+				prev = "<M-f>",
 			},
 		},
 	},

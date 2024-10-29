@@ -3,7 +3,7 @@
 return {
 	{
 		-- discord
-		'andweeb/presence.nvim',
+		"andweeb/presence.nvim",
 		lazy = false,
-	}
+	},
 }
