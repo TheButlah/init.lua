@@ -5,10 +5,9 @@ return {
 	---@type oil.SetupOpts
 	opts = {},
 	-- Optional dependencies
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 	lazy = false,
 	keys = {
 		{ "<leader>x", "<cmd>Oil<cr>", desc = "Open parent directory" },
 	},
-	-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
 }

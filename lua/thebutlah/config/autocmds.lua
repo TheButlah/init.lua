@@ -54,3 +54,52 @@ vim.api.nvim_create_user_command("FormatEnable", function()
 end, {
 	desc = "Re-enable autoformat-on-save",
 })
+
+-- Function to print merged plugin spec
+local function print_plugin_spec()
+	-- Get the lazy.nvim module
+	local lazy = require("lazy")
+	local inspect = require("vim.inspect")
+
+	-- Get all plugins
+	local plugins = lazy.plugins()
+
+	-- Create a temporary buffer
+	local buf = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_option(buf, "buftype", "nofile")
+	vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+	vim.api.nvim_buf_set_option(buf, "swapfile", false)
+
+	-- Format each plugin's spec
+	local all_lines = {}
+	for _, plugin in pairs(plugins) do
+		table.insert(all_lines, string.format("--- Plugin: %s ---", plugin.name))
+		-- Convert the plugin table to a string representation
+		local plugin_str = inspect(plugin)
+		-- Split the string into lines and add them
+		for line in plugin_str:gmatch("[^\r\n]+") do
+			table.insert(all_lines, line)
+		end
+		table.insert(all_lines, "")
+	end
+
+	-- Set the buffer content all at once
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, all_lines)
+
+	-- Open the buffer in a new window
+	vim.cmd("vsplit")
+	local win = vim.api.nvim_get_current_win()
+	vim.api.nvim_win_set_buf(win, buf)
+
+	-- Set buffer name
+	vim.api.nvim_buf_set_name(buf, "Lazy Plugin Spec")
+
+	-- Optional: Set syntax highlighting
+	vim.cmd("set ft=lua")
+
+	-- Make buffer read-only
+	vim.api.nvim_buf_set_option(buf, "modifiable", false)
+end
+
+-- Create a user command to call the function
+vim.api.nvim_create_user_command("PrintLazySpec", print_plugin_spec, {})
