@@ -71,7 +71,7 @@ vim.opt.cursorline = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "  ", trail = "·", nbsp = "␣" }
 
 -- Don't show the mode, since it's already in the status line
 -- vim.opt.showmode = false

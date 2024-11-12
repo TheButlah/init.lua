@@ -21,3 +21,13 @@ vim.keymap.set(
 	vim.diagnostic.setloclist,
 	{ desc = "Open diagnostics list" }
 )
+
+vim.keymap.set({ "n", "v" }, "<leader>tl", function(...)
+	local listchars = vim.opt.listchars:get()
+	if listchars.tab == "  " then
+		listchars.tab = "» "
+	else
+		listchars.tab = "  "
+	end
+	vim.opt.listchars = listchars
+end, { desc = "[T]oggle [L]istchars" })
