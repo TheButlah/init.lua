@@ -1,6 +1,3 @@
-# TODO: lua_ls doens't use this file. Turn off lua_ls formatting and add stylua
-# formatting support.
-
 column_width = 88 # From python's black formatter
 
 [sort_requires]
