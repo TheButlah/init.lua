@@ -14,7 +14,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		--- The below dependencies are optional,
-		"MeanderingProgrammer/render-markdown.nvim",
+		{ "MeanderingProgrammer/render-markdown.nvim", enabled = vim.g.have_nerd_font },
 		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font }, -- or echasnovski/mini.icons
 		-- "zbirenbaum/copilot.lua", -- for providers='copilot'
 		{

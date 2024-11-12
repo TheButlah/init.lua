@@ -20,6 +20,11 @@ return {
 		-- Automatically insert matching pairs for quotes, braces, etc
 		require("mini.pairs").setup()
 
+		-- Animation to show the current indent scope
+		-- require("mini.indentscope").setup({
+		-- 	symbol = vim.g.have_nerd_font and "╎" or "╎",
+		-- })
+
 		-- ... and there is more!
 		--  Check out: https://github.com/echasnovski/mini.nvim
 	end,

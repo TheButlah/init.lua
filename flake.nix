@@ -33,6 +33,7 @@
               [
                 nixpkgs-fmt
                 stylua
+                lua-language-server
               ]) ++ [
               nvimPkg
               rustToolchain
