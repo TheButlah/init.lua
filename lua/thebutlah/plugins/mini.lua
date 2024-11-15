@@ -18,7 +18,7 @@ return {
 		require("mini.surround").setup()
 
 		-- Automatically insert matching pairs for quotes, braces, etc
-		require("mini.pairs").setup()
+		-- require("mini.pairs").setup()
 
 		-- Animation to show the current indent scope
 		-- require("mini.indentscope").setup({
