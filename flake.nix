@@ -28,6 +28,8 @@
             ] ++ pkgs.lib.optional pkgs.stdenv.isDarwin [
               pkgs.libiconv
               pkgs.darwin.apple_sdk.frameworks.Security
+            ] ++ pkgs.lib.optional pkgs.stdenv.isLinux [
+              pkgs.openssl.dev
             ];
             packages = (with pkgs;
               [
