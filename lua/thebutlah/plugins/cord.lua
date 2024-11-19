@@ -4,7 +4,7 @@ return {
 	event = "VeryLazy",
 	opts = {
 		display = {
-			show_time = false,
+			show_time = true,
 		},
 		timer = {
 			reset_on_idle = true, -- Reset start timestamp on idle
