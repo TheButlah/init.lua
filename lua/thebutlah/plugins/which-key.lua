@@ -5,6 +5,7 @@ return { -- Helpful popup to explain keybindings
 	opts = {
 		spec = {
 			{ "<leader>a", group = "[A]I" },
+			{ "<leader>ac", group = "avante: [C]onflict" },
 			{ "<leader>c", group = "[C]ode", mode = { "n", "x" } },
 			{ "<leader>d", group = "[D]ocument" },
 			{ "<leader>r", group = "[R]ename" },

@@ -4,6 +4,18 @@ return {
 	version = "^0.0.9",
 	opts = {
 		-- add any opts here
+		mappings = {
+			--- @class AvanteConflictMappings
+			diff = {
+				ours = "<leader>aco",
+				theirs = "<leader>act",
+				all_theirs = "<leader>aca",
+				both = "<leader>acb",
+				cursor = "<leader>acc",
+				next = "]x",
+				prev = "[x",
+			},
+		},
 	},
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 	build = "make BUILD_FROM_SOURCE=true",
