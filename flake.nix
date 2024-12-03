@@ -33,6 +33,7 @@
             ];
             packages = (with pkgs;
               [
+                openssl.dev
                 nixpkgs-fmt
                 stylua
                 lua-language-server
