@@ -33,10 +33,11 @@
             ];
             packages = (with pkgs;
               [
-                openssl.dev
-                nixpkgs-fmt
-                stylua
                 lua-language-server
+                nixpkgs-fmt
+                openssl.dev
+                pkg-config
+                stylua
               ]) ++ [
               nvimPkg
               rustToolchain
