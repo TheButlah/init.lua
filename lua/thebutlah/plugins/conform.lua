@@ -31,10 +31,17 @@ return {
 				lsp_format = lsp_format_opt,
 			}
 		end,
+		formatters = {
+			dotnet_csharpier = {
+				-- Change where to find the command
+				command = "dotnet",
+				args = { "tool", "run", "dotnet-csharpier", "--write-stdout" },
+			},
+		},
 		formatters_by_ft = {
 			lua = { "stylua" },
 			nix = { "nixpkgs_fmt" },
-			cs = { "csharpier" },
+			cs = { "dotnet_csharpier", "csharpier", stop_after_first = true },
 			python = { "black" },
 
 			-- Conform can also run multiple formatters sequentially
