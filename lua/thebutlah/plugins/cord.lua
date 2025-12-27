@@ -1,6 +1,7 @@
 return {
 	"vyfor/cord.nvim",
-	build = "./build || .\\build",
+	version = "^2.3.8",
+	build = ":Cord update build",
 	event = "VeryLazy",
 	opts = {
 		display = {
