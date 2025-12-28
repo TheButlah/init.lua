@@ -22,6 +22,14 @@ return {
 				prev = "[x",
 			},
 		},
+		input = {
+			provider = "snacks",
+			provider_opts = {
+				-- Additional snacks.input options
+				title = "Avante Input",
+				icon = " ",
+			},
+		},
 	},
 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
 	dependencies = {
