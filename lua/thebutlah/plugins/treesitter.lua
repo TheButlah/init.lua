@@ -4,9 +4,8 @@ return {
 	branch = "main",
 	build = ":TSUpdate",
 	lazy = "false",
-	-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-	opts = {
-		ensure_installed = {
+	init = function()
+		local parsers = {
 			"bash",
 			"c",
 			"diff",
@@ -22,18 +21,17 @@ return {
 			"vim",
 			"vimdoc",
 			"yaml",
-		},
-		-- Autoinstall languages that are not installed
-		auto_install = true,
-		highlight = {
-			enable = true,
-			-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-			--  If you are experiencing weird indenting issues, add the language to
-			--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-			additional_vim_regex_highlighting = { "ruby" },
-		},
-		indent = { enable = true, disable = { "ruby" } },
-	},
+		}
+		require("nvim-treesitter").install(parsers)
+		for _, p in pairs(parsers) do
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { p },
+				callback = function()
+					vim.treesitter.start()
+				end,
+			})
+		end
+	end,
 	dependencies = {
 		-- Adds ability to navigate with treesitter textobjects
 		{

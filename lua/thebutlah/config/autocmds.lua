@@ -22,7 +22,7 @@ end
 -- See https://www.jmaguire.tech/posts/treesitter_folding/
 local configure_folds = function()
 	vim.wo.foldmethod = "expr"
-	vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+	vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 	vim.wo.foldenable = false -- change to true to auto fold.
 	vim.wo.foldminlines = 5
 	vim.wo.foldlevel = max_fold_level()

@@ -53,6 +53,7 @@
               openssl.dev
               pkg-config
               stylua
+              tree-sitter
             ])
             ++ [
               nvimPkg
