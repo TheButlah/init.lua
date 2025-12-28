@@ -97,3 +97,11 @@ vim.opt.listchars = { tab = "  ", trail = "·", nbsp = "␣" }
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+-- vim.diagnostic.config({ virtual_lines = true })
+vim.diagnostic.config({
+	virtual_lines = {
+		-- Only show virtual line diagnostics for the current cursor line
+		current_line = true,
+	},
+})
