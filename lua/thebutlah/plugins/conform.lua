@@ -45,7 +45,7 @@ return {
 		},
 		formatters_by_ft = {
 			lua = { "stylua" },
-			nix = { "nixpkgs_fmt" },
+			nix = { "nixfmt" },
 			cs = { "dotnet_csharpier", "csharpier", stop_after_first = true },
 			python = { "black" },
 

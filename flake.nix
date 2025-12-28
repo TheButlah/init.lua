@@ -2,7 +2,8 @@
   description = "Developer Shell";
 
   inputs = {
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     fenix = {
       url = "github:nix-community/fenix";
@@ -10,41 +11,56 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, fenix, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    { self
+    , nixpkgs
+    , nixpkgs-unstable
+    , fenix
+    , flake-utils
+    ,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
-        pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
-        nvimPkg = pkgsUnstable.neovim;
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            ((import ./unstable-overlay.nix) { inherit nixpkgs-unstable; })
+          ];
+
+        };
+        nvimPkg = pkgs.neovim;
         rustToolchain = fenix.packages.${system}.fromToolchainFile {
           file = ./rust-toolchain.toml;
-          sha256 = "sha256-yMuSb5eQPO/bHv+Bcf/US8LVMbf/G/0MSfiPwBhiPpk=";
+          sha256 = "sha256-sqSWJDUxc+zaz1nBWMAJKTAGBuGWP25GCftIOlCEAtA=";
         };
       in
       {
-        devShells.default = pkgs.mkShell
-          {
-            buildInputs = [
-            ] ++ pkgs.lib.optional pkgs.stdenv.isDarwin [
-              pkgs.libiconv
-              pkgs.darwin.apple_sdk.frameworks.Security
-            ] ++ pkgs.lib.optional pkgs.stdenv.isLinux [
-              pkgs.openssl.dev
-            ];
-            packages = (with pkgs;
-              [
-                lua-language-server
-                nixpkgs-fmt
-                openssl.dev
-                pkg-config
-                stylua
-              ]) ++ [
+        devShells.default = pkgs.mkShell {
+          buildInputs = [
+          ]
+          ++ pkgs.lib.optional pkgs.stdenv.isDarwin [
+            pkgs.libiconv
+            pkgs.darwin.apple_sdk.frameworks.Security
+          ]
+          ++ pkgs.lib.optional pkgs.stdenv.isLinux [
+            pkgs.openssl.dev
+          ];
+          packages =
+            (with pkgs; [
+              lua-language-server
+              nixfmt-tree
+              openssl.dev
+              pkg-config
+              stylua
+            ])
+            ++ [
               nvimPkg
               rustToolchain
             ];
-          };
+        };
         packages."nvim" = nvimPkg;
-        formatter = pkgs.nixpkgs-fmt;
+        formatter = pkgs.nixfmt-tree;
       }
     );
 }
