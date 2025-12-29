@@ -13,6 +13,7 @@ return { -- Helpful popup to explain keybindings
 			{ "<leader>t", group = "[T]oggle" },
 			{ "<leader>w", group = "[W]orkspace" },
 			{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
+			{ "gr", group = "LSP", mode = { "n", "v" } },
 		},
 	},
 	keys = {
