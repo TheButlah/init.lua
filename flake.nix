@@ -5,9 +5,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -15,7 +15,7 @@
     { self
     , nixpkgs
     , nixpkgs-unstable
-    , fenix
+    , rust-overlay
     , flake-utils
     ,
     }:
@@ -25,15 +25,13 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
+            rust-overlay.overlays.default
             ((import ./unstable-overlay.nix) { inherit nixpkgs-unstable; })
           ];
 
         };
         nvimPkg = pkgs.neovim;
-        rustToolchain = fenix.packages.${system}.fromToolchainFile {
-          file = ./rust-toolchain.toml;
-          sha256 = "sha256-sqSWJDUxc+zaz1nBWMAJKTAGBuGWP25GCftIOlCEAtA=";
-        };
+        rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
       in
       {
         devShells.default = pkgs.mkShell {
@@ -41,7 +39,6 @@
           ]
           ++ pkgs.lib.optional pkgs.stdenv.isDarwin [
             pkgs.libiconv
-            pkgs.darwin.apple_sdk.frameworks.Security
           ]
           ++ pkgs.lib.optional pkgs.stdenv.isLinux [
             pkgs.openssl.dev
